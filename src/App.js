@@ -9,6 +9,18 @@ import PurchaseConfirmation from "./Pages/PurchaseConfirmation";
 import Logout from "./Pages/Logout";
 import AccountTypeSelection from "./Pages/Account";
 import PurchaseSuccess from "./Pages/PurchaseSuccess";
+import ForgotPassword from "./components/ForgotPassword";
+import AccountDetails from "./Pages/Accoutdetails";
+import PropertySearch from "./Pages/PropertySearch";
+import PropertyDetails from "./Pages/AccountDet";  // ✅ Property Details Page
+import MarketStats from "./Pages/MarketStats";  // ✅ Market Stats Page
+
+
+// ✅ Protected Route Component
+const ProtectedRoute = ({ element }) => {
+  const userToken = localStorage.getItem("token");
+  return userToken ? element : <Navigate to="/login" />;
+};
 
 function App() {
   const [userToken, setUserToken] = useState(localStorage.getItem("token"));
@@ -18,28 +30,30 @@ function App() {
     window.addEventListener("storage", checkToken);
     return () => window.removeEventListener("storage", checkToken);
   }, []);
-  
-  useEffect(() => {
-    const loginListener = () => setUserToken(localStorage.getItem("token"));
-    window.addEventListener("login", loginListener);
-    return () => window.removeEventListener("login", loginListener);
-  }, []);
-  
+
   return (
     <Router>
       <Routes>
-
+        {/* ✅ Public Routes */}
         <Route path="/" element={userToken ? <Navigate to="/home" /> : <AccountTypeSelection />} />
         <Route path="/welcome" element={userToken ? <Navigate to="/home" /> : <WelcomePage />} />
         <Route path="/login" element={userToken ? <Navigate to="/home" /> : <Login />} />
         <Route path="/register" element={<Contact />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/logout" element={<Logout />} />
 
-        {/* Protected Routes */}
-        <Route path="/home" element={userToken ? <Home /> : <Navigate to="/login" />} />
-        <Route path="/buy-credits" element={userToken ? <PurchaseCredits /> : <Navigate to="/login" />} />
-        <Route path="/confirmation" element={userToken ? <PurchaseConfirmation /> : <Navigate to="/login" />} />
-        <Route path="/success" element={userToken ? <PurchaseSuccess  /> : <Navigate to="/login" />} />
+        {/* ✅ Protected Routes */}
+        <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
+        <Route path="/buy-credits" element={<ProtectedRoute element={<PurchaseCredits />} />} />
+        <Route path="/confirmation" element={<ProtectedRoute element={<PurchaseConfirmation />} />} />
+        <Route path="/success" element={<ProtectedRoute element={<PurchaseSuccess />} />} />
+        <Route path="/account-details" element={<ProtectedRoute element={<AccountDetails />} />} />
+        <Route path="/search-property" element={<ProtectedRoute element={<PropertySearch />} />} />
+        <Route path="/property/:propertyId" element={<ProtectedRoute element={<PropertyDetails />} />} />  {/* ✅ Property Details */}
+        <Route path="/market-stats" element={<ProtectedRoute element={<MarketStats />} />} />  {/* ✅ Market Stats */}
+      
+        {/* ✅ Catch-all Route (404 Page) */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API_BASE_URL = "https://forestgreen-rail-905681.hostingersite.com/api";
 
@@ -11,10 +13,8 @@ const Contact = () => {
     phone_number: "",
     password: "",
   });
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,15 +24,21 @@ const Contact = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+
       const data = await response.json();
+
       if (response.ok) {
-        alert("Registration successful! Please login.");
+        toast.success("Registration successful! Please login.");
         navigate("/login");
       } else {
-        setError(data.message || "Registration failed. Try again.");
+        if (data.message?.includes("email already exists")) {
+          toast.error("This email is already registered. Try logging in.");
+        } else {
+          toast.error(data.message || "Registration failed. Try again.");
+        }
       }
     } catch (error) {
-      setError("An error occurred. Try again.");
+      toast.error("An error occurred. Try again.");
     }
   };
 
@@ -106,7 +112,7 @@ const Contact = () => {
             className="prose-invert relative md:pb-4 md:pt-24"
             bis_skin_checked={1}
           >
-            <h1 className="text-center fw-bold">Create Account </h1>
+            <h2 className="text-center fw-bold">Create Account </h2>
           </div>
         </div>
         <div className="my-12 container" bis_skin_checked={1}>
@@ -153,9 +159,9 @@ const Contact = () => {
                 bis_skin_checked={1}
               >
                 <div className="mx-auto max-w-lg lg:max-w-none" bis_skin_checked={1}>
-                  <p>
+                  {/* <p>
                     Fill out the form and our team will get back to you within 24 hours. We look forward to hearing from you!
-                  </p>
+                  </p> */}
                   <form className="master-form">
                     <div
                       className="grid grid-cols-[--cols-default] fi-fo-component-ctn gap-6"
@@ -166,7 +172,7 @@ const Contact = () => {
                           className="fi-section rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10"
                           id="data.contact-us"
                         >
-                          <header className="fi-section-header flex flex-col gap-3 px-6">
+                          {/* <header className="fi-section-header flex flex-col gap-3 px-6">
                             <div
                               className="flex items-center gap-3"
                               bis_skin_checked={1}
@@ -180,7 +186,7 @@ const Contact = () => {
                                 </h3>
                               </div>
                             </div>
-                          </header>
+                          </header> */}
                           <div
                             className="fi-section-content-ctn border-t border-gray-200 dark:border-white/10"
                             bis_skin_checked={1}

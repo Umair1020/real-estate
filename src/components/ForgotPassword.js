@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API_BASE_URL = "https://forestgreen-rail-905681.hostingersite.com/api";
 
@@ -8,6 +10,7 @@ const ForgotPassword = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+  
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
@@ -16,15 +19,19 @@ const ForgotPassword = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        setMessage("A password reset link has been sent to your email.");
+        toast.success("Password reset link sent!");
+        setMessage("");
         setError("");
       } else {
+        toast.error(data.message || "Error sending reset link.");
         setError(data.message || "Error sending reset link.");
       }
     } catch (error) {
+      toast.error("Server error. Try again later.");
       setError("An error occurred.");
     }
   };

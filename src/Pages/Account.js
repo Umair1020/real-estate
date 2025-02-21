@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import ReactAudioPlayer from "react-audio-player";
 
 const AccountTypeSelection = () => {
   const [selectedAccount, setSelectedAccount] = useState(null);
@@ -83,7 +84,11 @@ const AccountTypeSelection = () => {
             >
               Property Search Client
             </button>
-
+            <ReactAudioPlayer
+        src="/1.mp3"
+        autoPlay
+        loop
+      />
             {/* <button
               onClick={() => handleAccountSelect("Shatering Account")}
               className="account-button shatering-button"

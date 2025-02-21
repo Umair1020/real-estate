@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import BackButton from "../components/BackButton";
 
 const API_BASE_URL = "https://forestgreen-rail-905681.hostingersite.com/api";
 const stripePromise = loadStripe("pk_test_51P2ZKBP2rKrOH9q6wUNCsMJkJMeGXNIrHf9HJrlgPEEMbGrDrsz7SNn5lwryqZIsWnUHxTPQR5M7Hv6r2hkZQ8gc00ja44v10c");
@@ -112,8 +113,8 @@ const PurchaseCreditsForm = () => {
         <div>
             <div className="main-container main">
                 <div className="content-wrapper">
-                    <div className="welcome-box">
-                        <h1>Welcome, {firstName}</h1>
+                    <div className="welcome-box d-flex  justify-content-between">
+                      <BackButton />  <h1>Welcome, {firstName}</h1>
                     </div>
 
                     <h1>Buy Credits</h1>

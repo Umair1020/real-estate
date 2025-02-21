@@ -3,14 +3,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.cdnfonts.com/css/butter-cup');
+
 /* General Styles */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: Montserrat;
   background-color: #f7fafc;
   margin: 0;
   padding: 0;
 }
-
+p{
+  font-family: Hello Holiday;
+}
 /* Container for the Account Selection Page */
 .account-selection-container {
   display: flex;
@@ -200,9 +204,7 @@ abbr:where([title]) {
 h2{
   font-family: Roundkey;
 }
-p{
-  font-family: Raleway;
-}
+
 .rbhzbum{
   display: block;                position: relative;                overflow: hidden;                width: 150px;                height: 57px;                margin: 0;                padding: 0;   
 }
@@ -923,50 +925,6 @@ dialog:is(.dark *) {
   --tw-contain-layout: ;
   --tw-contain-paint: ;
   --tw-contain-style:
-}
-
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  width: 100%
-}
-
-@media(min-width: 640px) {
-  .container {
-      max-width:640px
-  }
-}
-
-@media(min-width: 768px) {
-  .container {
-      max-width:768px
-  }
-}
-
-@media(min-width: 1024px) {
-  .container {
-      max-width:1024px
-  }
-}
-
-@media(min-width: 1280px) {
-  .container {
-      max-width:1280px
-  }
-}
-
-@media(min-width: 1536px) {
-  .container {
-      max-width:1536px
-  }
-}
-
-@media(min-width: 1600px) {
-  .container {
-      max-width:1600px
-  }
 }
 
 .prose {
@@ -11917,6 +11875,7 @@ easymde/dist/easymde.min.css:
 .features .feature-box h3 {
   font-size: 18px;
   color: #012970;
+  font-family: Roundkey;
   font-weight: 700;
   margin: 0;
 }
@@ -12098,6 +12057,60 @@ text-decoration-skip-ink: none;
 
 }
 
+/* Card box */
+.card {
+  margin: auto;
+  width: 50%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+/* Titles */
+.title {
+  color: #FF5733;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.invoice-title {
+  color: #FF5733;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+/* Invoice items */
+.invoice-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+}
+
+/* Button styles */
+.download-btn {
+  background-color: #FF5733;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.download-btn:hover {
+  background-color: #E14A2C;
+}
+
+/* Error message */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
 .input-box button {
   padding: 1rem;
   border: 1px solid #FF5724;
@@ -12135,4 +12148,16 @@ text-decoration-skip-ink: none;
 }
 .color{
   color: #FF5724;
+}
+
+@media (max-width:991px) {
+  .card {
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: left;
+  }
+  
 }
